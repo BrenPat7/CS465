@@ -1,7 +1,6 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
 
-// GET /
 router.get('/', (req, res) => {
     res.render('index', { 
         title: 'Home',
@@ -10,7 +9,6 @@ router.get('/', (req, res) => {
     });
 });
 
-// GET /about
 router.get('/about', (req, res) => {
     res.render('about', {
         title: 'About Us',
@@ -19,7 +17,6 @@ router.get('/about', (req, res) => {
     });
 });
 
-// GET /contact
 router.get('/contact', (req, res) => {
     res.render('contact', {
         title: 'Contact Us',
@@ -28,9 +25,8 @@ router.get('/contact', (req, res) => {
     });
 });
 
-// POST /contact
 router.post('/contact', (req, res) => {
-    // Logic to handle contact form
+    console.log(req.body); 
     res.redirect('/contact');
 });
 

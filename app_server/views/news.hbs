@@ -1,0 +1,46 @@
+<div id="contents">
+    <meta charset="UTF-8">
+	<title>Dive Sites - Bhaccasyoniztas Beach Resort Website Template</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+<div id="contents">
+    <div id="background">
+		<div id="page">
+			{{> header}}
+    <div class="box">
+        <div>
+            <div id="news" class="body">
+                <div class="sidebar">
+                    <h3>Latest News</h3>
+                    <ul>
+                        {{#each latestNews}}
+                        <li>
+                            <a href="/news/{{this.slug}}">{{this.title}}</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    <h3>Vaction Tips</h3>
+                    <ul>
+                        {{#each vacationTips}}
+                        <li>
+                            <a href="/tips/{{this.slug}}">{{this.title}}</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div>
+                    <h1>News</h1>
+                    
+                    <img src="{{mainArticle.image}}" alt="Img">
+                    <h2>{{mainArticle.title}}</h2>
+                    <span class="time">{{mainArticle.date}}<br> by: {{mainArticle.author}}</span>
+                    
+                    <p>
+                        {{{mainArticle.content}}}
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> footer}}
+</div>

@@ -1,0 +1,30 @@
+<div id="contents">
+    <meta charset="UTF-8">
+	<title>Dive Sites - Bhaccasyoniztas Beach Resort Website Template</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+<div id="contents">
+    <div id="background">
+		<div id="page">
+			{{> header}}
+    <div class="box">
+        <div>
+            <div class="body">
+                <h1>Meals</h1>
+                <ul id="foods">
+                    {{! Loop over each meal object passed from the route }}
+                    {{#each meals}}
+                    <li>
+                        <h2><a href="/meals/{{this.slug}}">{{this.title}}</a></h2>
+                        <div class="infos">
+                            <a href="/meals/{{this.slug}}"><img src="{{this.image}}" alt="Img" height="169" width="780"><span class="cover"></span></a>
+                            <p>
+                                {{{this.description}}}
+                            </p>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

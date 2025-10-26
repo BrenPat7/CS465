@@ -1,37 +1,46 @@
+const fetch = require('node-fetch');
+
 const tripsEndpoint = 'http://localhost:3000/api/trips';
-const options = {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json'
+
+const travel = async (req, res) => {
+  try {
+    const response = await fetch(tripsEndpoint);
+    
+    if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
     }
-};
 
-//var fs = require('fs');
-//var trips = JSON.parse(fs.readFileSync('./app_server/data/trips.json',
-//'utf8'));
+    const json = await response.json();
 
-const travel = async function (req, res, next) {
-    let message = '';
+    let message = null;
+    let trips = [];
 
-    await fetch(tripsEndpoint, options)
-        .then(res => res.json())
-        .then((json) => {
-          let message = null;
-          if (!(json instanceof Array)) {
-            message = 'API lookup error';
-            json = [];
-          }else {
-            if (!json.length) {
-              message = 'No trips found';
-            }
-          }
-           res.render('travel', { title: 'Travlr Getaways', trips: json, message });
-        })
-        .catch((err) => {
-            res.status(500).send(err.message);
-        });
+    if (json instanceof Array) {
+      trips = json;
+      if (!trips.length) {
+        message = 'No trips found';
+      }
+    } else {
+      message = 'API lookup error: Unexpected data format.';
+    }
+
+    res.render('travel', {
+      title: 'Travlr Getaways',
+      trips: trips,
+      message: message
+    });
+
+  } catch (err) {
+    console.error(err); 
+    
+    res.render('travel', {
+        title: 'Travlr Getaways',
+        trips: [],
+        message: 'Error fetching trips: ' + err.message
+    });
+  }
 };
 
 module.exports = {
-    travel,
+  travel,
 };
